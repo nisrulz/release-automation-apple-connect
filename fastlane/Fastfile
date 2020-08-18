@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby -w
+
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# Opt out of sending analytics data about usage to fastlane servers
+opt_out_usage
+
+# ============= Lanes ================
+
+platform :ios do
+  desc "Download and overwrite metadata"
+  lane :fetch_metadata do
+    sh "rm -rf ./screenshots/"
+    ENV["DELIVER_FORCE_OVERWRITE"] = "1"
+    sh "fastlane deliver download_metadata"
+    sh "fastlane deliver download_screenshots"
+  end
+
+  desc "Update metadata for the application on Apple App Store"
+  lane :update_metadata do
+    upload_to_app_store(
+      skip_screenshots: true,
+      skip_metadata: false,
+      skip_binary_upload: true,
+    )
+    puts "iOS update_metadata lane completed ✅"
+  end
+
+  desc "Update screenshots for the application on Apple App Store"
+  lane :update_screenshots do
+    upload_to_app_store(
+      skip_screenshots: false,
+      skip_metadata: true,
+      skip_binary_upload: true,
+    )
+    puts "iOS update_screenshots lane completed ✅"
+  end
+end

@@ -1,0 +1,20 @@
+# The Deliverfile allows you to store various App Store Connect metadata
+# For more information, check out the docs
+# https://docs.fastlane.tools/actions/deliver/
+
+app_identifier(ENV["IOS_PACKAGE_NAME"]) # The bundle identifier of your app
+username(ENV["APPLE_CONNECT_USER_NAME"]) # Your Apple email address
+team_id(ENV["APPLE_CONNECT_TEAM_ID"])
+
+platform("ios")
+precheck_include_in_app_purchases(false)
+skip_app_version_update(true)
+submit_for_review(false)
+automatic_release(false)
+force(true) # Skip HTMl report verification
+
+# Uncomment to target a specific version that should be edited or created
+# app_version("1.0.0")
+
+# Uncomment when you want to reference the latest published version
+# use_live_version(true)
