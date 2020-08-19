@@ -21,6 +21,7 @@ opt_out_usage
 # ============= Lanes ================
 
 platform :ios do
+  # ====================== fetch_metadata ======================
   desc "Download and overwrite metadata"
   lane :fetch_metadata do
     sh "rm -rf ./screenshots/"
@@ -29,6 +30,7 @@ platform :ios do
     sh "fastlane deliver download_screenshots"
   end
 
+  # ====================== update_metadata ======================
   desc "Update metadata for the application on Apple App Store"
   lane :update_metadata do
     upload_to_app_store(
@@ -39,6 +41,7 @@ platform :ios do
     puts "iOS update_metadata lane completed ✅"
   end
 
+  # ====================== update_screenshots ======================
   desc "Update screenshots for the application on Apple App Store"
   lane :update_screenshots do
     upload_to_app_store(
