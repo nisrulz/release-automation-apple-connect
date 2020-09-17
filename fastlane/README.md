@@ -26,6 +26,11 @@ Download and overwrite metadata
 fastlane ios update_metadata
 ```
 Update metadata for the application on Apple App Store
+### ios update_screenshots
+```
+fastlane ios update_screenshots
+```
+Update screenshots for the application on Apple App Store
 
 ----
 
